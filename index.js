@@ -11,30 +11,51 @@
 
 const arrWords = ['стакан', 'диван', 'матрас',  'палас', 'мотор', 'пылесос', 'квартира', 'репозиторий'];
 
-function generateWord (arrWords) {
-  const num = Math.floor(Math.random() * arrWords.length);
-  return  arrWords[num];
-//console.log(generateWord(arrWords))
-
 const button = document.getElementById('btn');
 const input = document.getElementById('input');
+const wrapper = document.getElementById('word_wrapper');
+console.log(wrapper)
+const guessWord = generateWord(arrWords);
+showNumbersLettersWord(guessWord);
+
 button.addEventListener('click', () => {
-const inputValue = getInputData(input);
+  const inputValue = getInputData(input);
 // console.log(inputValue);
 });
 function getInputData (input) {
   return input.value;
 }
 
+function generateWord (arrWords) {
+  const num = Math.floor(Math.random() * arrWords.length);
+  return  arrWords[num];
+//console.log(generateWord(arrWords))
+
 }
 
-const guessWord = generateWord(arrWords);
+function showNumbersLettersWord (guessWord) {
 
-function isLetterInWord(word, letter) {
+  guessWord.split('').forEach(() => {
+    const span = document.createElement('span');
+    span.textContent = '-';
+    wrapper.append(span);
+  });
+
+  // for (let i = 0; i < guessWord.length; i++) {
+  //   const span = document.createElement('span');
+  //   span.textContent = '-';
+  //   wrapper.append(span);
+  // }
+
+
+}
+
+
+// function isLetterInWord(word, letter) {
     
-}
+// }
 
-isLetterInWord(guessWord, inputData)
+// isLetterInWord(guessWord, inputData)
 //console.log(generateWord(arrWords));
 
 

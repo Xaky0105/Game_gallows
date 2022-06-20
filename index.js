@@ -1,4 +1,4 @@
-const arrWords = ['стакан', 'диван', 'матрас',  'палас', 'мотор'];
+//const arrWords = ['стакан', 'диван', 'матрас',  'палас', 'мотор'];
 
 // 1.Написать функцию генератор слов 
 // 2.Повесить обработчик событий на кнопку 
@@ -11,9 +11,9 @@ const arrWords = ['стакан', 'диван', 'матрас',  'палас', '
 // 9.Написать функцию, которая будет создавать pop-up в случае победы
 // 10.Написать функцию, которая будет создавать pop-up в случае поражения
 
-function generateWord (hidenWord) {
-  const num = Math.floor(Math.random() * hidenWord.length);
-  return  hidenWord[num];
+function generateWord (arrWords) {
+  const num = Math.floor(Math.random() * arrWords.length);
+  return  arrWords[num];
 
 }
-console.log(generateWord(arrWords));
+//console.log(generateWord(arrWords));

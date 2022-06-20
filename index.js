@@ -14,7 +14,6 @@
 function generateWord (arrWords) {
   const num = Math.floor(Math.random() * arrWords.length);
   return  arrWords[num];
-}
 //console.log(generateWord(arrWords))
 
 const button = document.getElementById('btn');
@@ -27,5 +26,5 @@ function getInputData (input) {
   return input.value;
 }
 
-
-
+}
+//console.log(generateWord(arrWords));

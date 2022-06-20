@@ -1,5 +1,3 @@
-//const arrWords = ['стакан', 'диван', 'матрас',  'палас', 'мотор'];
-
 // 1.Написать функцию генератор слов 
 // 2.Повесить обработчик событий на кнопку 
 // 3.Написать функцию, которая будет получать данные из input 
@@ -10,6 +8,8 @@
 // 8.Написать функцию, которая будет проверять отгадал ли пользователь слово(если отгадал, то возвращаем true, если есть хотя бы одна неотгаданная буква, то false) 
 // 9.Написать функцию, которая будет создавать pop-up в случае победы
 // 10.Написать функцию, которая будет создавать pop-up в случае поражения
+
+const arrWords = ['стакан', 'диван', 'матрас',  'палас', 'мотор', 'пылесос', 'квартира', 'репозиторий'];
 
 function generateWord (arrWords) {
   const num = Math.floor(Math.random() * arrWords.length);
@@ -27,4 +27,14 @@ function getInputData (input) {
 }
 
 }
+
+const guessWord = generateWord(arrWords);
+
+function isLetterInWord(word, letter) {
+    
+}
+
+isLetterInWord(guessWord, inputData)
 //console.log(generateWord(arrWords));
+
+

@@ -9,53 +9,101 @@
 // 9.Написать функцию, которая будет создавать pop-up в случае победы
 // 10.Написать функцию, которая будет создавать pop-up в случае поражения
 
-const arrWords = ['стакан', 'диван', 'матрас',  'палас', 'мотор', 'пылесос', 'квартира', 'репозиторий'];
+function game() {
+  const arrWords = ['стакан', 'диван', 'матрас',  'палас', 'мотор', 'пылесос', 'квартира', 'репозиторий'];
+  const player = document.getElementById('player');
+  const button = document.getElementById('btn');
+  const input = document.getElementById('input');
+  const wrapper = document.getElementById('word_wrapper');
+  const guessWord = generateWord(arrWords);
+  let userError = 1;
+  showNumbersLettersWord(guessWord);
 
-const button = document.getElementById('btn');
-const input = document.getElementById('input');
-const wrapper = document.getElementById('word_wrapper');
-console.log(wrapper)
-const guessWord = generateWord(arrWords);
-showNumbersLettersWord(guessWord);
+  button.addEventListener('click', btnClickHandler);
 
-button.addEventListener('click', () => {
-  const inputValue = getInputData(input);
-// console.log(inputValue);
-});
-function getInputData (input) {
-  return input.value;
-}
+  function btnClickHandler() {
+    const inputValue = getInputData(input);
+      isLetterInWord(guessWord, inputValue);
+      if (userError === 4) {
+        button.removeEventListener('click', btnClickHandler);
+        showPopUp(`Вы проиграли, верное слово было ${guessWord}`);
+      }
+      if (isGuessedWord()) {
+        button.removeEventListener('click', btnClickHandler);
+        showPopUp(`Вы выйграли, отгадав слово ${guessWord}`);
+      }
+    input.value = '';
+  }
+  function showPopUp(message) {
+    const gameWrapper = document.getElementById('game');
+    const popup = document.createElement('div');
+    popup.classList.add('popup');
+    const textContainer = document.createElement('p');
+    const btn = document.createElement('button');
+    btn.addEventListener('click', () => {
+      popup.remove();
+      wrapper.textContent = '';
+      player.src = `./img/1.png`
+      return game();
+    })
 
-function generateWord (arrWords) {
-  const num = Math.floor(Math.random() * arrWords.length);
-  return  arrWords[num];
-//console.log(generateWord(arrWords))
+    popup.append(textContainer, btn);
 
-}
+    textContainer.textContent = message;
+    btn.textContent = 'Начать заново';
+    gameWrapper.append(popup);
+  }
+  function isGuessedWord() {
+    const listSpanContainer = Array.from(document.getElementsByClassName('letterContainer'));
+    return listSpanContainer.every(item => item.textContent !== '-');
+  }
+  function getInputData () {
+    return input.value;
+  }
 
-function showNumbersLettersWord (guessWord) {
-
-  guessWord.split('').forEach(() => {
-    const span = document.createElement('span');
-    span.textContent = '-';
-    wrapper.append(span);
-  });
-
-  // for (let i = 0; i < guessWord.length; i++) {
-  //   const span = document.createElement('span');
-  //   span.textContent = '-';
-  //   wrapper.append(span);
-  // }
+  function generateWord (arrWords) {
+    const num = Math.floor(Math.random() * arrWords.length);
+    console.log(num)
+    return  arrWords[num];
 
 
-}
+  }
 
+  function showNumbersLettersWord (guessWord) {
 
-// function isLetterInWord(word, letter) {
+    guessWord.split('').forEach(() => {
+      const span = document.createElement('span');
+      span.classList.add('letterContainer');
+      span.textContent = '-';
+      wrapper.append(span);
+    });
+  }
+  function isLetterInWord(word, guessLetter) {
+    word.split('').forEach((item, index) => {
+      if (item === guessLetter) {
+        showHiddenLetter(guessLetter, index);
+      }
+    });
+    if (!word.includes(guessLetter)) {
+      takeLife();
+    }
+
+  }
+
+  function takeLife() {
+    userError++;
+    player.src = `./img/${userError}.png`;
     
-// }
+  }
 
-// isLetterInWord(guessWord, inputData)
-//console.log(generateWord(arrWords));
+  function showHiddenLetter(guessLetter, index) {
+    const letterContainer = document.getElementsByClassName('letterContainer')[index];
+    letterContainer.textContent = guessLetter;
+  }
+
+}
+
+game();
+
 
 

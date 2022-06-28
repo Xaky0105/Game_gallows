@@ -1,5 +1,5 @@
-import {game} from './index.js'
-import {gameWrapper, wrapper, hintWrapper} from './constants.js'
+import {game} from './index.js';
+import {gameWrapper, wrapper, hintWrapper, arrImages} from './constants.js';
 
 export function showPopUp(message) {
     const popup = document.createElement('div');
@@ -12,13 +12,13 @@ export function showPopUp(message) {
     btn.textContent = 'Начать заново';
 
     gameWrapper.append(popup);
-    setTimeout(() => popup.style.opacity = 1); //// без сет таймаута почему-то не работает, можно подумать как сделать иначе
+    setTimeout(() => popup.style.opacity = 1);
 
     btn.addEventListener('click', () => {
       popup.remove();
       wrapper.textContent = '';
       hintWrapper.textContent = '';
-      player.src = `./img/1.png`
-      return game();
+      player.src = arrImages[0];
+      game();
     })
 }

@@ -41,6 +41,8 @@ export const arrWords = [
     },
     
 ];
+export const arrImages = ['./img/1.png', './img/2.png', './img/3.png', './img/4.png'];
+
 export const player = document.getElementById('player');
 export const button = document.getElementById('btn');
 export const input = document.getElementById('input');

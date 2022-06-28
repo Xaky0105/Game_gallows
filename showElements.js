@@ -1,4 +1,4 @@
-import { hintWrapper } from "./constants.js"
+import { arrImages, hintWrapper, player } from "./constants.js";
 
 export function showNumbersLettersWord (guessWord) {
     const wrapper = document.getElementById('word_wrapper');
@@ -15,18 +15,13 @@ export function showHiddenLetter(guessLetter, index) {
     letterContainer.textContent = guessLetter;
 }
 
-export function changeImage() {
-    let userError = 1;
-    return function takeLife() {
-        userError === 4 ? userError = 1 : userError;
-        player.src = `./img/${++userError}.png`;
-        return userError;
-    }
-}
-
 export function showHint(hint) {
     const hintContainer = document.createElement('span');
     hintContainer.textContent = `Подсказка: ${hint}`;
     hintWrapper.append(hintContainer);
 }
-export const takeLife = changeImage();
+
+export function changeImage(counterFunc) {
+    const counter = counterFunc();
+    player.src = arrImages[counter];
+}
